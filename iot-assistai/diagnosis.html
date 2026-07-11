@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diagnosis Dashboard – IoT AssistAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <script>const t=localStorage.getItem('iot-theme')||'light';document.documentElement.setAttribute('data-theme',t);</script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f62fe"/><circle cx="14" cy="14" r="4" fill="white"/><circle cx="14" cy="5" r="2" fill="#08bdba"/><circle cx="14" cy="23" r="2" fill="#08bdba"/><circle cx="5" cy="14" r="2" fill="#08bdba"/><circle cx="23" cy="14" r="2" fill="#08bdba"/><line x1="14" y1="7" x2="14" y2="10" stroke="white" stroke-width="1.5"/><line x1="14" y1="18" x2="14" y2="21" stroke="white" stroke-width="1.5"/><line x1="7" y1="14" x2="10" y2="14" stroke="white" stroke-width="1.5"/><line x1="18" y1="14" x2="21" y2="14" stroke="white" stroke-width="1.5"/></svg>
+      IoT <span class="accent">AssistAI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chatbot.html">AI Chatbot</a></li>
+      <li><a href="knowledge-base.html">Knowledge Base</a></li>
+      <li><a href="diagnosis.html" class="active">Diagnosis</a></li>
+      <li><a href="device-dashboard.html">Devices</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-btn" onclick="toggleTheme()"><span class="theme-icon">🌙</span></button>
+      <a href="chatbot.html" class="btn btn-primary btn-sm">Start Chat</a>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="dash-sidebar">
+    <div class="dash-sidebar-title">Diagnosis</div>
+    <div class="dash-nav-item active">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Run Diagnosis
+    </div>
+    <div class="dash-nav-item" onclick="location.href='chatbot.html'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      AI Chatbot
+    </div>
+    <div class="dash-nav-item" onclick="location.href='device-dashboard.html'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+      Device Dashboard
+    </div>
+    <div class="dash-nav-item" onclick="location.href='knowledge-base.html'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </div>
+    <hr class="divider" style="margin:1rem 1.25rem;"/>
+    <div class="dash-sidebar-title">Issue Types</div>
+    <div class="dash-nav-item" style="font-size:.85rem;color:var(--text-muted);">
+      <span class="status-dot dot-red"></span> Connectivity Issues
+    </div>
+    <div class="dash-nav-item" style="font-size:.85rem;color:var(--text-muted);">
+      <span class="status-dot dot-yellow"></span> Firmware Problems
+    </div>
+    <div class="dash-nav-item" style="font-size:.85rem;color:var(--text-muted);">
+      <span class="status-dot dot-blue"></span> Configuration Errors
+    </div>
+    <div class="dash-nav-item" style="font-size:.85rem;color:var(--text-muted);">
+      <span class="status-dot dot-yellow"></span> Sensor Malfunctions
+    </div>
+    <div class="dash-nav-item" style="font-size:.85rem;color:var(--text-muted);">
+      <span class="status-dot dot-green"></span> Compatibility Issues
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dash-main">
+    <div class="dash-header">
+      <div>
+        <h2 style="margin-bottom:.25rem;">AI Diagnosis Engine</h2>
+        <p style="color:var(--text-muted);font-size:.9rem;">Describe your IoT issue to automatically detect the problem category</p>
+      </div>
+      <a href="chatbot.html" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Open AI Chat
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="dash-stats">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--danger);">18</div>
+        <div class="stat-label">Connectivity Issues</div>
+        <div class="stat-trend" style="color:var(--danger);">↑ 3 this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--warning);">7</div>
+        <div class="stat-label">Firmware Problems</div>
+        <div class="stat-trend" style="color:var(--success);">↓ 2 resolved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--primary);">12</div>
+        <div class="stat-label">Config Errors</div>
+        <div class="stat-trend" style="color:var(--success);">↓ 5 resolved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--success);">4</div>
+        <div class="stat-label">Sensor Issues</div>
+        <div class="stat-trend" style="color:var(--text-muted);">→ Stable</div>
+      </div>
+    </div>
+
+    <!-- Input Form -->
+    <div class="card" style="margin-bottom:2rem;">
+      <h3 style="margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;">
+        <span>🔍</span> Describe Your IoT Issue
+      </h3>
+      <div class="form-group">
+        <label for="symptomInput">What is happening with your device?</label>
+        <textarea id="symptomInput" class="form-control" rows="4" placeholder="e.g. 'My smart thermostat suddenly stopped connecting to Wi-Fi after I updated its firmware last night. The LED blinks orange 3 times repeatedly.'"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="deviceModel">Device Model (optional)</label>
+          <input type="text" id="deviceModel" class="form-control" placeholder="e.g. Nest Thermostat 4th Gen"/>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="issueCategory">Issue Category (optional)</label>
+          <select id="issueCategory" class="form-control">
+            <option value="">Auto-detect</option>
+            <option>Connectivity / Wi-Fi</option>
+            <option>Bluetooth Pairing</option>
+            <option>Firmware Update</option>
+            <option>Sensor Malfunction</option>
+            <option>Configuration Error</option>
+            <option>Device Compatibility</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;margin-top:1.25rem;">
+        <button id="runDiagnosis" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Run AI Diagnosis
+        </button>
+        <button class="btn btn-ghost" onclick="document.getElementById('symptomInput').value='';document.getElementById('diagResults').style.display='none';">Clear</button>
+      </div>
+    </div>
+
+    <!-- Results Area -->
+    <div id="diagResults" style="display:none;"></div>
+
+    <!-- Issue Category Overview -->
+    <div class="card" style="margin-top:2rem;">
+      <h3 style="margin-bottom:1.25rem;">Issue Category Overview</h3>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
+            <span style="font-size:.9rem;font-weight:500;">📡 Connectivity Issues</span>
+            <span style="font-size:.9rem;color:var(--text-muted);">36%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:36%;background:var(--danger);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
+            <span style="font-size:.9rem;font-weight:500;">⚙️ Configuration Errors</span>
+            <span style="font-size:.9rem;color:var(--text-muted);">24%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:24%;background:var(--primary);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
+            <span style="font-size:.9rem;font-weight:500;">🔄 Firmware Problems</span>
+            <span style="font-size:.9rem;color:var(--text-muted);">17%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:17%;background:var(--warning);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
+            <span style="font-size:.9rem;font-weight:500;">📊 Sensor Malfunctions</span>
+            <span style="font-size:.9rem;color:var(--text-muted);">13%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:13%;background:var(--accent);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
+            <span style="font-size:.9rem;font-weight:500;">🔗 Compatibility Issues</span>
+            <span style="font-size:.9rem;color:var(--text-muted);">10%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:10%;background:var(--text-muted);"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Diagnoses Table -->
+    <div class="card" style="margin-top:2rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+        <h3>Recent Diagnoses</h3>
+        <span class="badge badge-gray">Last 7 days</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Issue Description</th>
+              <th>Category</th>
+              <th>Confidence</th>
+              <th>Status</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Smart plug won't connect to 5GHz network</td>
+              <td><span class="badge badge-red">Connectivity</span></td>
+              <td><div class="progress-bar" style="width:80px;display:inline-block;"><div class="progress-fill" style="width:96%;"></div></div> 96%</td>
+              <td><span class="badge badge-green">Resolved</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">2h ago</td>
+            </tr>
+            <tr>
+              <td>Firmware update failed at 67%</td>
+              <td><span class="badge badge-yellow">Firmware</span></td>
+              <td><div class="progress-bar" style="width:80px;display:inline-block;"><div class="progress-fill" style="width:91%;background:var(--warning);"></div></div> 91%</td>
+              <td><span class="badge badge-yellow">In Progress</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">5h ago</td>
+            </tr>
+            <tr>
+              <td>Temperature sensor showing -40°C indoors</td>
+              <td><span class="badge badge-blue">Sensor</span></td>
+              <td><div class="progress-bar" style="width:80px;display:inline-block;"><div class="progress-fill" style="width:88%;background:var(--primary);"></div></div> 88%</td>
+              <td><span class="badge badge-green">Resolved</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">1d ago</td>
+            </tr>
+            <tr>
+              <td>MQTT broker authentication failing</td>
+              <td><span class="badge badge-gray">Config</span></td>
+              <td><div class="progress-bar" style="width:80px;display:inline-block;"><div class="progress-fill" style="width:94%;"></div></div> 94%</td>
+              <td><span class="badge badge-green">Resolved</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">2d ago</td>
+            </tr>
+            <tr>
+              <td>Zigbee device not pairing with hub</td>
+              <td><span class="badge badge-gray">Compatibility</span></td>
+              <td><div class="progress-bar" style="width:80px;display:inline-block;"><div class="progress-fill" style="width:82%;background:var(--text-muted);"></div></div> 82%</td>
+              <td><span class="badge badge-red">Open</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">3d ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

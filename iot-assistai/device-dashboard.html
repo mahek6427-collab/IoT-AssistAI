@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Device Dashboard – IoT AssistAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <script>const t=localStorage.getItem('iot-theme')||'light';document.documentElement.setAttribute('data-theme',t);</script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f62fe"/><circle cx="14" cy="14" r="4" fill="white"/><circle cx="14" cy="5" r="2" fill="#08bdba"/><circle cx="14" cy="23" r="2" fill="#08bdba"/><circle cx="5" cy="14" r="2" fill="#08bdba"/><circle cx="23" cy="14" r="2" fill="#08bdba"/><line x1="14" y1="7" x2="14" y2="10" stroke="white" stroke-width="1.5"/><line x1="14" y1="18" x2="14" y2="21" stroke="white" stroke-width="1.5"/><line x1="7" y1="14" x2="10" y2="14" stroke="white" stroke-width="1.5"/><line x1="18" y1="14" x2="21" y2="14" stroke="white" stroke-width="1.5"/></svg>
+      IoT <span class="accent">AssistAI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chatbot.html">AI Chatbot</a></li>
+      <li><a href="knowledge-base.html">Knowledge Base</a></li>
+      <li><a href="diagnosis.html">Diagnosis</a></li>
+      <li><a href="device-dashboard.html" class="active">Devices</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-btn" onclick="toggleTheme()"><span class="theme-icon">🌙</span></button>
+      <a href="chatbot.html" class="btn btn-primary btn-sm">Start Chat</a>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="dash-sidebar">
+    <div class="dash-sidebar-title">Device Management</div>
+    <div class="dash-nav-item active">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      All Devices
+    </div>
+    <div class="dash-nav-item" onclick="filterDevices('online')">
+      <span class="status-dot dot-green"></span> Online Devices
+    </div>
+    <div class="dash-nav-item" onclick="filterDevices('offline')">
+      <span class="status-dot dot-red"></span> Offline Devices
+    </div>
+    <div class="dash-nav-item" onclick="filterDevices('warning')">
+      <span class="status-dot dot-yellow"></span> Needs Attention
+    </div>
+    <hr class="divider" style="margin:1rem 1.25rem;"/>
+    <div class="dash-sidebar-title">Device Types</div>
+    <div class="dash-nav-item" style="font-size:.85rem;">📡 Routers & Hubs</div>
+    <div class="dash-nav-item" style="font-size:.85rem;">🌡️ Sensors</div>
+    <div class="dash-nav-item" style="font-size:.85rem;">💡 Smart Lighting</div>
+    <div class="dash-nav-item" style="font-size:.85rem;">🔒 Security</div>
+    <div class="dash-nav-item" style="font-size:.85rem;">🏠 Climate Control</div>
+    <hr class="divider" style="margin:1rem 1.25rem;"/>
+    <div class="dash-nav-item" onclick="location.href='diagnosis.html'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Diagnosis
+    </div>
+    <div class="dash-nav-item" onclick="location.href='chatbot.html'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      AI Chatbot
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dash-main">
+    <div class="dash-header">
+      <div>
+        <h2 style="margin-bottom:.25rem;">Device Dashboard</h2>
+        <p style="color:var(--text-muted);font-size:.9rem;">Monitor and manage all your IoT devices</p>
+      </div>
+      <button class="btn btn-primary" id="addDeviceBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Device
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="dash-stats">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--primary);">8</div>
+        <div class="stat-label">Total Devices</div>
+        <div class="stat-trend" style="color:var(--text-muted);">↑ 2 this month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--success);">5</div>
+        <div class="stat-label">Online</div>
+        <div class="stat-trend" style="color:var(--success);">● All healthy</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--danger);">2</div>
+        <div class="stat-label">Offline</div>
+        <div class="stat-trend" style="color:var(--danger);">↑ Needs attention</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--warning);">1</div>
+        <div class="stat-label">Firmware Outdated</div>
+        <div class="stat-trend" style="color:var(--warning);">Update available</div>
+      </div>
+    </div>
+
+    <!-- Device Table -->
+    <div class="card" style="margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:1rem;">
+        <h3>All Devices</h3>
+        <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;">
+          <input type="text" class="form-control" style="width:220px;" placeholder="🔍 Search devices…" id="deviceSearch" oninput="searchDevices(this.value)"/>
+          <select class="form-control" style="width:auto;" onchange="filterByType(this.value)">
+            <option>All Types</option>
+            <option>Router</option>
+            <option>Sensor</option>
+            <option>Light</option>
+            <option>Lock</option>
+            <option>Camera</option>
+            <option>Thermostat</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="deviceTable">
+          <thead>
+            <tr>
+              <th>Device Name</th>
+              <th>Type</th>
+              <th>Firmware</th>
+              <th>Status</th>
+              <th>Last Activity</th>
+              <th>Issues</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="deviceTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Device Detail Cards -->
+    <div style="margin-bottom:1.5rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+        <h3>Device Details</h3>
+        <span class="badge badge-blue">Click a device row to view details</span>
+      </div>
+    </div>
+
+    <!-- Selected Device Detail -->
+    <div id="deviceDetail" style="display:none;"></div>
+
+    <!-- Troubleshooting History -->
+    <div class="card" style="margin-top:1rem;">
+      <h3 style="margin-bottom:1.25rem;">Troubleshooting History</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Device</th>
+              <th>Issue</th>
+              <th>Resolution</th>
+              <th>Date</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Smart Router</td>
+              <td><span class="badge badge-red">Wi-Fi Drop</span></td>
+              <td><span class="badge badge-green">Resolved — Channel Changed</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">Jan 15, 2025</td>
+              <td style="color:var(--text-muted);font-size:.85rem;">12 min</td>
+            </tr>
+            <tr>
+              <td>Smart Lock</td>
+              <td><span class="badge badge-yellow">Firmware Outdated</span></td>
+              <td><span class="badge badge-yellow">Pending — Update Scheduled</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">Jan 14, 2025</td>
+              <td style="color:var(--text-muted);font-size:.85rem;">—</td>
+            </tr>
+            <tr>
+              <td>Temp Sensor #2</td>
+              <td><span class="badge badge-blue">Wrong Readings</span></td>
+              <td><span class="badge badge-green">Resolved — Recalibrated</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">Jan 12, 2025</td>
+              <td style="color:var(--text-muted);font-size:.85rem;">8 min</td>
+            </tr>
+            <tr>
+              <td>IP Camera</td>
+              <td><span class="badge badge-red">Offline</span></td>
+              <td><span class="badge badge-green">Resolved — Power Cycled</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">Jan 10, 2025</td>
+              <td style="color:var(--text-muted);font-size:.85rem;">5 min</td>
+            </tr>
+            <tr>
+              <td>Smart Bulb (Kitchen)</td>
+              <td><span class="badge badge-gray">Config Error</span></td>
+              <td><span class="badge badge-green">Resolved — Re-configured</span></td>
+              <td style="color:var(--text-muted);font-size:.85rem;">Jan 8, 2025</td>
+              <td style="color:var(--text-muted);font-size:.85rem;">15 min</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+<script>
+const DEVICES = [
+  { id:1, name:'Smart Router',       type:'Router',      firmware:'v3.4.2',  status:'online',  lastSeen:'2 min ago',   issues:0,   icon:'📡', location:'Living Room' },
+  { id:2, name:'Smart Lock',         type:'Lock',        firmware:'v1.2.3',  status:'warning', lastSeen:'5 min ago',   issues:1,   icon:'🔒', location:'Front Door' },
+  { id:3, name:'Temp Sensor #1',     type:'Sensor',      firmware:'v2.1.0',  status:'online',  lastSeen:'1 min ago',   issues:0,   icon:'🌡️', location:'Bedroom' },
+  { id:4, name:'Temp Sensor #2',     type:'Sensor',      firmware:'v2.1.0',  status:'online',  lastSeen:'1 min ago',   issues:0,   icon:'🌡️', location:'Kitchen' },
+  { id:5, name:'Smart Bulb',         type:'Light',       firmware:'v1.5.1',  status:'online',  lastSeen:'10 min ago',  issues:0,   icon:'💡', location:'Bedroom' },
+  { id:6, name:'IP Camera',          type:'Camera',      firmware:'v4.2.0',  status:'offline', lastSeen:'3 hrs ago',   issues:1,   icon:'📹', location:'Garage' },
+  { id:7, name:'Smart Thermostat',   type:'Thermostat',  firmware:'v3.0.1',  status:'online',  lastSeen:'30 sec ago',  issues:0,   icon:'🌡️', location:'Hallway' },
+  { id:8, name:'Motion Sensor',      type:'Sensor',      firmware:'v1.0.5',  status:'offline', lastSeen:'2 days ago',  issues:1,   icon:'📊', location:'Backyard' },
+];
+
+const statusBadge = s => ({ online:'<span class="badge badge-green"><span class="status-dot dot-green"></span> Online</span>', offline:'<span class="badge badge-red"><span class="status-dot dot-red"></span> Offline</span>', warning:'<span class="badge badge-yellow"><span class="status-dot dot-yellow"></span> Warning</span>' }[s] || s);
+
+function renderTable(devices) {
+  const tbody = document.getElementById('deviceTableBody');
+  tbody.innerHTML = devices.map(d => `
+    <tr style="cursor:pointer;" onclick="showDetail(${d.id})">
+      <td><span style="margin-right:.4rem;">${d.icon}</span><strong>${d.name}</strong></td>
+      <td><span class="badge badge-gray">${d.type}</span></td>
+      <td><code style="font-size:.82rem;">${d.firmware}</code>${d.firmware<'v3' && d.type!=='Camera'?'':''}</td>
+      <td>${statusBadge(d.status)}</td>
+      <td style="color:var(--text-muted);font-size:.85rem;">${d.lastSeen}</td>
+      <td>${d.issues>0?'<span class="badge badge-red">'+d.issues+' issue'+( d.issues>1?'s':'')+'</span>':'<span class="badge badge-green">None</span>'}</td>
+      <td>
+        <a href="chatbot.html" class="btn btn-primary btn-sm" title="Troubleshoot this device">Fix</a>
+        <button class="btn btn-ghost btn-sm" style="margin-left:.25rem;" onclick="event.stopPropagation();showDetail(${d.id})">Details</button>
+      </td>
+    </tr>`).join('');
+}
+
+function showDetail(id) {
+  const d = DEVICES.find(x => x.id === id);
+  if (!d) return;
+  const detail = document.getElementById('deviceDetail');
+  detail.style.display = 'block';
+  detail.innerHTML = `
+    <div class="card" style="border-left:4px solid var(--primary);margin-bottom:1rem;">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:3rem;">${d.icon}</span>
+        <div>
+          <h3 style="margin-bottom:.25rem;">${d.name}</h3>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;">${statusBadge(d.status)}<span class="badge badge-gray">${d.type}</span><span class="badge badge-blue">${d.location}</span></div>
+        </div>
+        <div style="margin-left:auto;">
+          <a href="chatbot.html" class="btn btn-primary">🤖 Troubleshoot</a>
+        </div>
+      </div>
+      <div class="grid-2" style="gap:1rem;">
+        <div style="background:var(--bg-alt);border-radius:var(--radius);padding:1rem;">
+          <div style="font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:.5rem;">Device Info</div>
+          <table style="font-size:.9rem;border:none;">
+            <tr><td style="color:var(--text-muted);padding:.25rem .5rem .25rem 0;border:none;">Device Name</td><td style="font-weight:600;border:none;">${d.name}</td></tr>
+            <tr><td style="color:var(--text-muted);padding:.25rem .5rem .25rem 0;border:none;">Type</td><td style="font-weight:600;border:none;">${d.type}</td></tr>
+            <tr><td style="color:var(--text-muted);padding:.25rem .5rem .25rem 0;border:none;">Location</td><td style="font-weight:600;border:none;">${d.location}</td></tr>
+            <tr><td style="color:var(--text-muted);padding:.25rem .5rem .25rem 0;border:none;">Firmware</td><td style="font-family:monospace;font-size:.85rem;border:none;">${d.firmware}</td></tr>
+            <tr><td style="color:var(--text-muted);padding:.25rem .5rem .25rem 0;border:none;">Last Seen</td><td style="border:none;">${d.lastSeen}</td></tr>
+            <tr><td style="color:var(--text-muted);padding:.25rem .5rem .25rem 0;border:none;">Status</td><td style="border:none;">${statusBadge(d.status)}</td></tr>
+          </table>
+        </div>
+        <div style="background:var(--bg-alt);border-radius:var(--radius);padding:1rem;">
+          <div style="font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:.5rem;">Diagnostics</div>
+          <div class="step-list">
+            <div class="step-item ${d.status!=='offline'?'completed':'active'}">
+              <div class="step-num">${d.status!=='offline'?'✓':'!'}</div>
+              <div>Network Connectivity: ${d.status!=='offline'?'✅ Connected':'❌ Disconnected'}</div>
+            </div>
+            <div class="step-item ${d.firmware>='v2'?'completed':'active'}">
+              <div class="step-num">${d.firmware>='v2'?'✓':'!'}</div>
+              <div>Firmware Version: ${d.firmware}</div>
+            </div>
+            <div class="step-item ${d.issues===0?'completed':''}">
+              <div class="step-num">${d.issues===0?'✓':d.issues}</div>
+              <div>Active Issues: ${d.issues===0?'None detected':''+d.issues+' issue(s) detected'}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      ${d.issues>0?`<div class="alert alert-warning" style="margin-top:1rem;"><span>⚠️</span><div>This device has active issues. <a href="chatbot.html" style="font-weight:600;">Chat with AI →</a> for guided troubleshooting.</div></div>`:''}
+    </div>`;
+  detail.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function searchDevices(q) {
+  const filtered = DEVICES.filter(d => d.name.toLowerCase().includes(q.toLowerCase()) || d.type.toLowerCase().includes(q.toLowerCase()));
+  renderTable(filtered);
+}
+
+function filterDevices(status) {
+  renderTable(status === 'all' ? DEVICES : DEVICES.filter(d => d.status === status));
+  document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function filterByType(type) {
+  renderTable(type === 'All Types' ? DEVICES : DEVICES.filter(d => d.type === type));
+}
+
+// Add device button
+document.getElementById('addDeviceBtn').addEventListener('click', () => {
+  const detail = document.getElementById('deviceDetail');
+  detail.style.display = 'block';
+  detail.innerHTML = `
+    <div class="card" style="margin-bottom:1rem;">
+      <h3 style="margin-bottom:1.25rem;">➕ Add New Device</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Device Name</label><input type="text" class="form-control" placeholder="e.g. Living Room Sensor"/></div>
+        <div class="form-group"><label>Device Type</label><select class="form-control"><option>Sensor</option><option>Router</option><option>Light</option><option>Lock</option><option>Camera</option><option>Thermostat</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Firmware Version</label><input type="text" class="form-control" placeholder="e.g. v2.1.0"/></div>
+        <div class="form-group"><label>Location</label><input type="text" class="form-control" placeholder="e.g. Kitchen"/></div>
+      </div>
+      <div style="display:flex;gap:1rem;margin-top:.5rem;">
+        <button class="btn btn-primary" onclick="this.textContent='Device Added ✅';setTimeout(()=>document.getElementById('deviceDetail').style.display='none',1500)">Add Device</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('deviceDetail').style.display='none'">Cancel</button>
+      </div>
+    </div>`;
+  detail.scrollIntoView({ behavior:'smooth', block:'nearest' });
+});
+
+renderTable(DEVICES);
+</script>
+</body>
+</html>

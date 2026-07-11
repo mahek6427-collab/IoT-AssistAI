@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Knowledge Base – IoT AssistAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <script>const t=localStorage.getItem('iot-theme')||'light';document.documentElement.setAttribute('data-theme',t);</script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f62fe"/><circle cx="14" cy="14" r="4" fill="white"/><circle cx="14" cy="5" r="2" fill="#08bdba"/><circle cx="14" cy="23" r="2" fill="#08bdba"/><circle cx="5" cy="14" r="2" fill="#08bdba"/><circle cx="23" cy="14" r="2" fill="#08bdba"/><line x1="14" y1="7" x2="14" y2="10" stroke="white" stroke-width="1.5"/><line x1="14" y1="18" x2="14" y2="21" stroke="white" stroke-width="1.5"/><line x1="7" y1="14" x2="10" y2="14" stroke="white" stroke-width="1.5"/><line x1="18" y1="14" x2="21" y2="14" stroke="white" stroke-width="1.5"/></svg>
+      IoT <span class="accent">AssistAI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chatbot.html">AI Chatbot</a></li>
+      <li><a href="knowledge-base.html" class="active">Knowledge Base</a></li>
+      <li><a href="diagnosis.html">Diagnosis</a></li>
+      <li><a href="device-dashboard.html">Devices</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-btn" onclick="toggleTheme()"><span class="theme-icon">🌙</span></button>
+      <a href="chatbot.html" class="btn btn-primary btn-sm">Start Chat</a>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero / Search -->
+<div class="kb-hero">
+  <div class="container">
+    <span style="display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);padding:.3rem .85rem;border-radius:2rem;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem;">IoT Knowledge Base</span>
+    <h1 style="color:#fff;margin-bottom:.75rem;">Troubleshooting Documentation</h1>
+    <p style="color:rgba(255,255,255,.75);font-size:1.05rem;">500+ guides, manuals, and FAQs for all IoT device categories</p>
+    <div class="kb-search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6f6f6f" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="kb-search-input" placeholder="Search guides, manuals, FAQs… e.g. 'Wi-Fi setup', 'firmware update'"/>
+      <button class="btn btn-primary btn-sm">Search</button>
+    </div>
+    <div style="display:flex;gap:.75rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">📡 Connectivity</span>
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">🔄 Firmware</span>
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">📊 Sensors</span>
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">⚙️ Configuration</span>
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">🔗 Compatibility</span>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Stats Row -->
+    <div class="grid-4" style="margin-bottom:2.5rem;">
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--primary);">512</div>
+        <div class="stat-label">Total Articles</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--accent);">248</div>
+        <div class="stat-label">Troubleshooting Guides</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--success);">96</div>
+        <div class="stat-label">Device Manuals</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--warning);">168</div>
+        <div class="stat-label">FAQs & HOWTOs</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="kb-tabs">
+      <div class="kb-tab active" data-tab="all">All Articles</div>
+      <div class="kb-tab" data-tab="guides">Troubleshooting Guides</div>
+      <div class="kb-tab" data-tab="manuals">Device Manuals</div>
+      <div class="kb-tab" data-tab="firmware">Firmware Docs</div>
+      <div class="kb-tab" data-tab="faq">FAQs</div>
+      <div class="kb-tab" data-tab="setup">Device Setup</div>
+    </div>
+
+    <!-- All Articles Panel -->
+    <div data-panel="all" class="kb-tab-panel" style="display:block;">
+      <div class="grid-3">
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-red">Guide</span>
+            <span class="badge badge-blue">Wi-Fi</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">5 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">Wi-Fi Connectivity Troubleshooting Complete Guide</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Step-by-step diagnosis for IoT device Wi-Fi failures including 2.4 GHz vs 5 GHz band issues, SSID visibility, and DHCP conflicts.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Jan 2025</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-yellow">Guide</span>
+            <span class="badge badge-blue">Bluetooth</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">7 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">Bluetooth BLE Pairing Issues & Fixes</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Comprehensive Bluetooth Low Energy troubleshooting covering discovery mode, bonding failures, and firmware compatibility.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Dec 2024</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-red">Critical</span>
+            <span class="badge badge-gray">Firmware</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">10 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">OTA Firmware Update Failure Recovery</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">How to recover from failed over-the-air updates, access recovery mode, and perform manual firmware flashing via USB.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Jan 2025</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-yellow">Guide</span>
+            <span class="badge badge-blue">Sensors</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">6 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">Sensor Calibration & Malfunction Diagnosis</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Calibrating temperature, humidity, motion, and CO2 sensors. Diagnosing drift, offset errors, and sensor hardware failure.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Nov 2024</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-blue">Guide</span>
+            <span class="badge badge-gray">Config</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">8 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">MQTT Broker Configuration for IoT Devices</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Setting up and troubleshooting MQTT connections, QoS levels, retain flags, and authentication with IBM IoT Platform.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Jan 2025</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-gray">Guide</span>
+            <span class="badge badge-blue">Compatibility</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">9 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">Matter Protocol: Cross-Brand Device Integration</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Using Matter and Thread to integrate devices from Apple HomeKit, Google Home, Amazon Alexa, and Samsung SmartThings.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Jan 2025</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-green">Setup</span>
+            <span class="badge badge-blue">Wi-Fi</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">4 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">First-Time IoT Device Setup Guide</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Step-by-step initial configuration for smart home devices including network provisioning, app pairing, and cloud registration.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Dec 2024</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-yellow">FAQ</span>
+            <span class="badge badge-gray">General</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">3 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">Why Does My IoT Device Keep Going Offline?</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Common reasons IoT devices repeatedly disconnect and proven solutions for maintaining stable connections.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Jan 2025</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+        <div class="kb-article-card">
+          <div class="kb-article-meta">
+            <span class="badge badge-red">Critical</span>
+            <span class="badge badge-gray">Security</span>
+            <span style="font-size:.78rem;color:var(--text-light);margin-left:auto;">12 min read</span>
+          </div>
+          <h3 style="font-size:1rem;margin-top:.25rem;">IoT Device Security Hardening Guide</h3>
+          <p style="font-size:.85rem;color:var(--text-muted);">Securing IoT deployments against common attack vectors, changing default credentials, and enabling encrypted communications.</p>
+          <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.78rem;color:var(--text-muted);">Updated Jan 2025</span>
+            <span style="font-size:.82rem;color:var(--primary);font-weight:600;">Read →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div style="margin-top:4rem;">
+      <div class="section-header" style="text-align:left;">
+        <span class="overline">Frequently Asked Questions</span>
+        <h2>Common IoT Questions</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.75rem;" id="faqList">
+        <div class="card" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong>Why won't my IoT device connect to 5 GHz Wi-Fi?</strong>
+            <span style="font-size:1.2rem;color:var(--text-muted);transition:transform .2s;" class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer" style="display:none;margin-top:1rem;color:var(--text-muted);font-size:.9rem;line-height:1.6;">
+            Most IoT devices only support the 2.4 GHz band due to lower cost chipsets and longer range requirements. Check your router settings and ensure you have a separate 2.4 GHz SSID available. Dual-band routers sometimes combine both bands — try separating them in your router admin panel.
+          </div>
+        </div>
+        <div class="card" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong>How do I factory reset my IoT device safely?</strong>
+            <span style="font-size:1.2rem;color:var(--text-muted);transition:transform .2s;" class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer" style="display:none;margin-top:1rem;color:var(--text-muted);font-size:.9rem;line-height:1.6;">
+            Before factory resetting: (1) Back up device configuration if the app supports it, (2) Note your current firmware version, (3) Remove the device from your smart home platform. Then hold the reset button for 10–15 seconds until LEDs indicate reset mode. Re-pair and re-configure after reset.
+          </div>
+        </div>
+        <div class="card" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong>What should I do if a firmware update bricked my device?</strong>
+            <span style="font-size:1.2rem;color:var(--text-muted);transition:transform .2s;" class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer" style="display:none;margin-top:1rem;color:var(--text-muted);font-size:.9rem;line-height:1.6;">
+            Try recovery mode first: hold Reset + Power simultaneously for 15 seconds. This forces the bootloader. Then connect via USB and use the manufacturer's recovery tool to reflash the firmware. If recovery mode is unavailable, contact manufacturer support with your device serial number.
+          </div>
+        </div>
+        <div class="card" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong>How do Zigbee, Z-Wave, and Matter differ?</strong>
+            <span style="font-size:1.2rem;color:var(--text-muted);transition:transform .2s;" class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer" style="display:none;margin-top:1rem;color:var(--text-muted);font-size:.9rem;line-height:1.6;">
+            <strong>Zigbee:</strong> Mesh network, 2.4 GHz, low power, requires a hub. Good for large deployments. <strong>Z-Wave:</strong> 900 MHz (less interference), mesh, requires hub, 232 device limit. <strong>Matter:</strong> New standard (2022) built on IP, works over Thread/Wi-Fi, cross-platform compatible, no hub needed. Matter is the future of smart home interoperability.
+          </div>
+        </div>
+        <div class="card" style="cursor:pointer;" onclick="toggleFaq(this)">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong>How often should I update IoT device firmware?</strong>
+            <span style="font-size:1.2rem;color:var(--text-muted);transition:transform .2s;" class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer" style="display:none;margin-top:1rem;color:var(--text-muted);font-size:.9rem;line-height:1.6;">
+            Enable automatic updates if available for security patches. For manual updates, check monthly or when you experience issues. Always read the release notes before updating production devices — some updates may reset configurations or change device behavior.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="alert alert-info" style="margin-top:3rem;">
+      <span>🤖</span>
+      <div>
+        <strong>Can't find what you're looking for?</strong>
+        Ask IoT AssistAI directly — our AI has access to the full knowledge base and can answer specific questions about your device.
+        <a href="chatbot.html" style="margin-left:.5rem;font-weight:600;">Start AI Chat →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2025 IoT AssistAI. Built for IBM Hackathon.</span>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="index.html" style="color:rgba(255,255,255,.5);">Home</a>
+        <a href="chatbot.html" style="color:rgba(255,255,255,.5);">Chatbot</a>
+        <a href="about.html" style="color:rgba(255,255,255,.5);">About</a>
+        <a href="contact.html" style="color:rgba(255,255,255,.5);">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+function toggleFaq(card) {
+  const answer = card.querySelector('.faq-answer');
+  const arrow = card.querySelector('.faq-arrow');
+  const isOpen = answer.style.display !== 'none';
+  answer.style.display = isOpen ? 'none' : 'block';
+  arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+</script>
+</body>
+</html>

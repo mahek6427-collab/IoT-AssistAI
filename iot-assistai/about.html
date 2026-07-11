@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About – IoT AssistAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <script>const t=localStorage.getItem('iot-theme')||'light';document.documentElement.setAttribute('data-theme',t);</script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f62fe"/><circle cx="14" cy="14" r="4" fill="white"/><circle cx="14" cy="5" r="2" fill="#08bdba"/><circle cx="14" cy="23" r="2" fill="#08bdba"/><circle cx="5" cy="14" r="2" fill="#08bdba"/><circle cx="23" cy="14" r="2" fill="#08bdba"/><line x1="14" y1="7" x2="14" y2="10" stroke="white" stroke-width="1.5"/><line x1="14" y1="18" x2="14" y2="21" stroke="white" stroke-width="1.5"/><line x1="7" y1="14" x2="10" y2="14" stroke="white" stroke-width="1.5"/><line x1="18" y1="14" x2="21" y2="14" stroke="white" stroke-width="1.5"/></svg>
+      IoT <span class="accent">AssistAI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chatbot.html">AI Chatbot</a></li>
+      <li><a href="knowledge-base.html">Knowledge Base</a></li>
+      <li><a href="diagnosis.html">Diagnosis</a></li>
+      <li><a href="device-dashboard.html">Devices</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-btn" onclick="toggleTheme()"><span class="theme-icon">🌙</span></button>
+      <a href="chatbot.html" class="btn btn-primary btn-sm">Start Chat</a>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<div style="background:linear-gradient(135deg,#001141,#003a8c);padding:4rem 0;text-align:center;">
+  <div class="container">
+    <span style="display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);padding:.3rem .85rem;border-radius:2rem;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem;">IBM Hackathon 2025</span>
+    <h1 style="color:#fff;margin-bottom:.75rem;">About IoT AssistAI</h1>
+    <p style="color:rgba(255,255,255,.75);font-size:1.1rem;max-width:600px;margin:0 auto;">An AI-powered IoT troubleshooting platform built on IBM watsonx.ai, Langflow, and RAG technology</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:4rem;align-items:start;">
+
+      <!-- Left Content -->
+      <div>
+        <!-- Problem Statement -->
+        <div style="margin-bottom:3rem;">
+          <span class="overline" style="display:block;margin-bottom:.5rem;">Problem Statement</span>
+          <h2 style="margin-bottom:1rem;">The IoT Troubleshooting Crisis</h2>
+          <p style="color:var(--text-muted);line-height:1.75;margin-bottom:1rem;">The global IoT market has grown to over 15 billion connected devices, with projections reaching 29 billion by 2030. However, device failures, connectivity issues, and configuration errors cost organizations an estimated <strong>$350 billion annually</strong> in downtime and support costs.</p>
+          <p style="color:var(--text-muted);line-height:1.75;margin-bottom:1rem;">Traditional troubleshooting methods are broken:</p>
+          <ul class="feature-list" style="gap:.6rem;">
+            <li>Users spend 4+ hours searching through 200-page manuals for a single fix</li>
+            <li>Support tickets are backlogged — average resolution time exceeds 48 hours</li>
+            <li>87% of IoT issues are recurrent and solvable with proper documentation</li>
+            <li>Non-technical users cannot navigate complex firmware and networking concepts</li>
+          </ul>
+        </div>
+
+        <!-- Project Objective -->
+        <div style="margin-bottom:3rem;">
+          <span class="overline" style="display:block;margin-bottom:.5rem;">Project Objective</span>
+          <h2 style="margin-bottom:1rem;">Our Solution</h2>
+          <p style="color:var(--text-muted);line-height:1.75;margin-bottom:1rem;">IoT AssistAI is an intelligent, conversational troubleshooting assistant that:</p>
+          <div style="display:flex;flex-direction:column;gap:.75rem;">
+            <div class="card" style="padding:1rem;display:flex;align-items:center;gap:.75rem;">
+              <span style="font-size:1.5rem;">🧠</span>
+              <div><strong>Understands</strong> user-described IoT issues in natural language</div>
+            </div>
+            <div class="card" style="padding:1rem;display:flex;align-items:center;gap:.75rem;">
+              <span style="font-size:1.5rem;">📚</span>
+              <div><strong>Retrieves</strong> exact solutions from a curated knowledge base using RAG</div>
+            </div>
+            <div class="card" style="padding:1rem;display:flex;align-items:center;gap:.75rem;">
+              <span style="font-size:1.5rem;">✅</span>
+              <div><strong>Delivers</strong> step-by-step troubleshooting instructions instantly</div>
+            </div>
+            <div class="card" style="padding:1rem;display:flex;align-items:center;gap:.75rem;">
+              <span style="font-size:1.5rem;">🔄</span>
+              <div><strong>Escalates</strong> to advanced diagnosis when simple fixes don't work</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Timeline / Workflow -->
+      <div>
+        <span class="overline" style="display:block;margin-bottom:1.25rem;">AI Chatbot Workflow</span>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>1. User Input</h4>
+            <p>User describes their IoT device issue in natural language via the chat interface, or uploads an image of the device/error message.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>2. NLP Processing (watsonx.ai)</h4>
+            <p>IBM watsonx.ai foundation model processes the input, extracting entities (device type, issue category, symptoms) and intent classification.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>3. Knowledge Retrieval (RAG)</h4>
+            <p>The vectorized knowledge base is searched using semantic similarity. Relevant document chunks (device manuals, guides) are retrieved as context.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>4. Response Generation</h4>
+            <p>The LLM generates a precise, step-by-step troubleshooting response grounded in the retrieved documentation — no hallucinations.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>5. Follow-up Handling</h4>
+            <p>IBM Orchestrate manages multi-turn conversation flow, asking clarifying questions when needed and escalating to advanced diagnosis automatically.</p>
+          </div>
+          <div class="timeline-item">
+            <h4>6. Resolution</h4>
+            <p>The issue is marked as resolved in the device dashboard. Anonymized resolution data improves future recommendations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RAG Architecture -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Technical Architecture</span>
+      <h2>Retrieval-Augmented Generation (RAG)</h2>
+      <p>How IoT AssistAI combines vector search with LLM generation for accurate, grounded responses</p>
+    </div>
+    <div class="rag-flow">
+      <div class="rag-step">
+        <span class="rag-icon">💬</span>
+        User Query
+      </div>
+      <div class="rag-arrow">→</div>
+      <div class="rag-step">
+        <span class="rag-icon">🔢</span>
+        Embedding Model
+      </div>
+      <div class="rag-arrow">→</div>
+      <div class="rag-step">
+        <span class="rag-icon">🗄️</span>
+        Vector DB Search
+      </div>
+      <div class="rag-arrow">→</div>
+      <div class="rag-step">
+        <span class="rag-icon">📄</span>
+        Document Chunks
+      </div>
+      <div class="rag-arrow">→</div>
+      <div class="rag-step">
+        <span class="rag-icon">🧠</span>
+        watsonx.ai LLM
+      </div>
+      <div class="rag-arrow">→</div>
+      <div class="rag-step" style="border-color:var(--primary);background:var(--primary-light);">
+        <span class="rag-icon">✅</span>
+        Grounded Answer
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:2.5rem;">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:1.75rem;margin-bottom:.75rem;">📦</div>
+        <h3>Knowledge Ingestion</h3>
+        <p>IoT manuals, guides, and FAQs are chunked, embedded with watsonx.ai embedding models, and stored in a vector database.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:1.75rem;margin-bottom:.75rem;">🔍</div>
+        <h3>Semantic Search</h3>
+        <p>User queries are embedded and compared against document vectors using cosine similarity to find the most relevant content.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:1.75rem;margin-bottom:.75rem;">🎯</div>
+        <h3>Grounded Generation</h3>
+        <p>The LLM receives both the user query and retrieved documents as context, generating accurate responses based on real documentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IBM Technology Stack -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Technology Stack</span>
+      <h2>Powered by IBM AI Platform</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div style="font-size:2rem;margin-bottom:1rem;">🧠</div>
+        <h3>IBM watsonx.ai</h3>
+        <p style="margin-bottom:1rem;">IBM's enterprise AI platform providing foundation models for natural language understanding and generation.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+          <span class="tech-badge">Foundation Models</span>
+          <span class="tech-badge">NLP</span>
+          <span class="tech-badge">Text Generation</span>
+          <span class="tech-badge">Embeddings</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:2rem;margin-bottom:1rem;">🔗</div>
+        <h3>IBM Langflow</h3>
+        <p style="margin-bottom:1rem;">Visual AI workflow orchestration tool that connects vector databases, LLMs, and data sources in a visual pipeline.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+          <span class="tech-badge">Visual Pipelines</span>
+          <span class="tech-badge">RAG Orchestration</span>
+          <span class="tech-badge">Data Connectors</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:2rem;margin-bottom:1rem;">🎭</div>
+        <h3>IBM Orchestrate</h3>
+        <p style="margin-bottom:1rem;">Intelligent AI agent orchestration for managing multi-step troubleshooting workflows and agent collaboration.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+          <span class="tech-badge">Agent Management</span>
+          <span class="tech-badge">Workflow Automation</span>
+          <span class="tech-badge">Multi-turn Dialog</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Impact -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Expected Impact</span>
+      <h2>IoT AssistAI by the Numbers</h2>
+    </div>
+    <div class="grid-4">
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--primary);">70%</div>
+        <div class="stat-label">Reduction in Support Tickets</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--success);">98%</div>
+        <div class="stat-label">Diagnosis Accuracy</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--accent);">&lt;5s</div>
+        <div class="stat-label">Average Response Time</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div class="stat-num" style="color:var(--warning);">500+</div>
+        <div class="stat-label">Device Issue Patterns</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#001141,#003a8c);padding:4rem 0;text-align:center;">
+  <div class="container">
+    <h2 style="color:#fff;margin-bottom:1rem;">Try IoT AssistAI Today</h2>
+    <p style="color:rgba(255,255,255,.75);margin-bottom:2rem;">Experience the future of IoT troubleshooting powered by IBM AI</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="chatbot.html" class="btn btn-primary btn-lg">Start Troubleshooting</a>
+      <a href="contact.html" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:#fff;">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2025 IoT AssistAI. Built for IBM Hackathon.</span>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="index.html" style="color:rgba(255,255,255,.5);">Home</a>
+        <a href="chatbot.html" style="color:rgba(255,255,255,.5);">Chatbot</a>
+        <a href="contact.html" style="color:rgba(255,255,255,.5);">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

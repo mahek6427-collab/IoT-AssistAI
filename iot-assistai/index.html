@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IoT AssistAI – Smart IoT Device Troubleshooting Chatbot</title>
+  <meta name="description" content="AI-Powered Troubleshooting for Smart IoT Devices. Diagnose Wi-Fi failures, Bluetooth issues, sensor malfunctions and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    const t = localStorage.getItem('iot-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  </script>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="6" fill="#0f62fe"/>
+        <circle cx="14" cy="14" r="4" fill="white"/>
+        <circle cx="14" cy="5" r="2" fill="#08bdba"/>
+        <circle cx="14" cy="23" r="2" fill="#08bdba"/>
+        <circle cx="5" cy="14" r="2" fill="#08bdba"/>
+        <circle cx="23" cy="14" r="2" fill="#08bdba"/>
+        <line x1="14" y1="7" x2="14" y2="10" stroke="white" stroke-width="1.5"/>
+        <line x1="14" y1="18" x2="14" y2="21" stroke="white" stroke-width="1.5"/>
+        <line x1="7" y1="14" x2="10" y2="14" stroke="white" stroke-width="1.5"/>
+        <line x1="18" y1="14" x2="21" y2="14" stroke="white" stroke-width="1.5"/>
+      </svg>
+      IoT <span class="accent">AssistAI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="chatbot.html">AI Chatbot</a></li>
+      <li><a href="knowledge-base.html">Knowledge Base</a></li>
+      <li><a href="diagnosis.html">Diagnosis</a></li>
+      <li><a href="device-dashboard.html">Devices</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <a href="chatbot.html" class="btn btn-primary btn-sm">Start Chat</a>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge animate-fadeup animate-delay-1">
+        <span>●</span> Powered by IBM watsonx.ai + RAG
+      </div>
+      <h1 class="hero-title animate-fadeup animate-delay-2">
+        IoT <span>AssistAI</span>
+      </h1>
+      <p class="hero-tagline animate-fadeup animate-delay-3">
+        AI-Powered Troubleshooting for Smart IoT Devices. Resolve connectivity failures, firmware issues, and sensor malfunctions instantly.
+      </p>
+      <div class="hero-ctas animate-fadeup animate-delay-4">
+        <a href="chatbot.html" class="btn btn-primary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Start Troubleshooting
+        </a>
+        <a href="diagnosis.html" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:#fff;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          Run Diagnosis
+        </a>
+      </div>
+      <div class="hero-stats animate-fadeup animate-delay-5">
+        <div>
+          <div class="hero-stat-num"><span data-count="500" data-suffix="+">0+</span></div>
+          <div class="hero-stat-label">Issue Patterns</div>
+        </div>
+        <div>
+          <div class="hero-stat-num"><span data-count="98" data-suffix="%">0%</span></div>
+          <div class="hero-stat-label">Accuracy Rate</div>
+        </div>
+        <div>
+          <div class="hero-stat-num"><span data-count="12">0</span></div>
+          <div class="hero-stat-label">Device Categories</div>
+        </div>
+        <div>
+          <div class="hero-stat-num"><span data-count="24" data-suffix="/7">0/7</span></div>
+          <div class="hero-stat-label">AI Availability</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Decorative IoT network SVG -->
+  <div class="hero-visual">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="120" stroke="rgba(15,98,254,.3)" stroke-width="1" fill="none"/>
+      <circle cx="200" cy="200" r="80" stroke="rgba(15,98,254,.2)" stroke-width="1" fill="none"/>
+      <circle cx="200" cy="200" r="40" fill="rgba(15,98,254,.15)" stroke="rgba(15,98,254,.5)" stroke-width="2"/>
+      <circle cx="200" cy="200" r="12" fill="#0f62fe"/>
+      <!-- Nodes -->
+      <circle cx="200" cy="80" r="10" fill="#08bdba"/>
+      <circle cx="200" cy="320" r="10" fill="#08bdba"/>
+      <circle cx="80" cy="200" r="10" fill="#08bdba"/>
+      <circle cx="320" cy="200" r="10" fill="#08bdba"/>
+      <circle cx="115" cy="115" r="8" fill="rgba(255,255,255,.3)"/>
+      <circle cx="285" cy="115" r="8" fill="rgba(255,255,255,.3)"/>
+      <circle cx="115" cy="285" r="8" fill="rgba(255,255,255,.3)"/>
+      <circle cx="285" cy="285" r="8" fill="rgba(255,255,255,.3)"/>
+      <!-- Lines from center to nodes -->
+      <line x1="200" y1="200" x2="200" y2="92" stroke="rgba(15,98,254,.4)" stroke-width="1.5"/>
+      <line x1="200" y1="200" x2="200" y2="308" stroke="rgba(15,98,254,.4)" stroke-width="1.5"/>
+      <line x1="200" y1="200" x2="92" y2="200" stroke="rgba(15,98,254,.4)" stroke-width="1.5"/>
+      <line x1="200" y1="200" x2="308" y2="200" stroke="rgba(15,98,254,.4)" stroke-width="1.5"/>
+      <line x1="200" y1="200" x2="122" y2="122" stroke="rgba(8,189,186,.3)" stroke-width="1"/>
+      <line x1="200" y1="200" x2="278" y2="122" stroke="rgba(8,189,186,.3)" stroke-width="1"/>
+      <line x1="200" y1="200" x2="122" y2="278" stroke="rgba(8,189,186,.3)" stroke-width="1"/>
+      <line x1="200" y1="200" x2="278" y2="278" stroke="rgba(8,189,186,.3)" stroke-width="1"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Core Capabilities</span>
+      <h2>Everything You Need to Fix IoT Issues</h2>
+      <p>Our AI-powered platform diagnoses and resolves complex IoT problems across all device categories.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card animate-on-scroll">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3>AI-Powered Chat</h3>
+        <p>Describe your IoT issue in plain language. Our AI understands context and provides step-by-step solutions instantly.</p>
+      </div>
+      <div class="card animate-on-scroll">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <h3>Smart Diagnosis</h3>
+        <p>Automatic issue categorization using ML classifiers. Identifies connectivity, firmware, sensor, and configuration problems.</p>
+      </div>
+      <div class="card animate-on-scroll">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        </div>
+        <h3>Knowledge Base</h3>
+        <p>500+ troubleshooting guides, firmware documentation, and device manuals powered by RAG retrieval.</p>
+      </div>
+      <div class="card animate-on-scroll">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        </div>
+        <h3>Real-Time Monitoring</h3>
+        <p>Track device health, connectivity status, and troubleshooting history across your entire IoT fleet.</p>
+      </div>
+      <div class="card animate-on-scroll">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
+        <h3>Instant Troubleshooting</h3>
+        <p>Guided, step-by-step resolution workflows for Wi-Fi, Bluetooth, firmware, and configuration issues.</p>
+      </div>
+      <div class="card animate-on-scroll">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </div>
+        <h3>Multi-Device Support</h3>
+        <p>Compatible with smart home hubs, sensors, cameras, thermostats, locks, and industrial IoT devices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Workflow</span>
+      <h2>How IoT AssistAI Works</h2>
+      <p>From issue description to solution in seconds, powered by IBM watsonx.ai and Retrieval-Augmented Generation.</p>
+    </div>
+    <div style="display:flex;gap:0;align-items:stretch;flex-wrap:wrap;">
+      <div class="card" style="flex:1;min-width:160px;text-align:center;border-radius:var(--radius-lg) 0 0 var(--radius-lg);margin:0;">
+        <div style="font-size:2.5rem;margin-bottom:.75rem;">💬</div>
+        <div style="font-weight:700;margin-bottom:.35rem;">1. Describe</div>
+        <p style="font-size:.85rem;">Tell the AI your IoT problem in natural language</p>
+      </div>
+      <div style="display:flex;align-items:center;padding:0 .5rem;color:var(--text-light);font-size:1.5rem;flex-shrink:0;">→</div>
+      <div class="card" style="flex:1;min-width:160px;text-align:center;border-radius:0;margin:0;border-left:none;">
+        <div style="font-size:2.5rem;margin-bottom:.75rem;">🧠</div>
+        <div style="font-weight:700;margin-bottom:.35rem;">2. Analyze</div>
+        <p style="font-size:.85rem;">AI classifies issue and retrieves relevant documentation</p>
+      </div>
+      <div style="display:flex;align-items:center;padding:0 .5rem;color:var(--text-light);font-size:1.5rem;flex-shrink:0;">→</div>
+      <div class="card" style="flex:1;min-width:160px;text-align:center;border-radius:0;margin:0;border-left:none;">
+        <div style="font-size:2.5rem;margin-bottom:.75rem;">📚</div>
+        <div style="font-weight:700;margin-bottom:.35rem;">3. Retrieve</div>
+        <p style="font-size:.85rem;">RAG pulls exact solutions from knowledge base</p>
+      </div>
+      <div style="display:flex;align-items:center;padding:0 .5rem;color:var(--text-light);font-size:1.5rem;flex-shrink:0;">→</div>
+      <div class="card" style="flex:1;min-width:160px;text-align:center;border-radius:0 var(--radius-lg) var(--radius-lg) 0;margin:0;border-left:none;">
+        <div style="font-size:2.5rem;margin-bottom:.75rem;">✅</div>
+        <div style="font-weight:700;margin-bottom:.35rem;">4. Resolve</div>
+        <p style="font-size:.85rem;">Step-by-step instructions delivered immediately</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ISSUE TYPES ═══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Issue Categories</span>
+      <h2>Issues We Help Resolve</h2>
+      <p>Comprehensive coverage of the most common IoT device problems.</p>
+    </div>
+    <div class="grid-3">
+      <a href="diagnosis.html" class="card" style="text-decoration:none;color:inherit;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+          <span style="font-size:1.75rem;">📡</span>
+          <h3 style="margin:0;">Wi-Fi Connectivity</h3>
+        </div>
+        <p>Network failures, SSID issues, authentication errors, IP conflicts, and signal strength problems.</p>
+        <div style="margin-top:1rem;"><span class="badge badge-red">Common</span></div>
+      </a>
+      <a href="diagnosis.html" class="card" style="text-decoration:none;color:inherit;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+          <span style="font-size:1.75rem;">🔵</span>
+          <h3 style="margin:0;">Bluetooth Pairing</h3>
+        </div>
+        <p>Pairing failures, connection drops, BLE discovery issues, and device not found errors.</p>
+        <div style="margin-top:1rem;"><span class="badge badge-yellow">Frequent</span></div>
+      </a>
+      <a href="diagnosis.html" class="card" style="text-decoration:none;color:inherit;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+          <span style="font-size:1.75rem;">🔄</span>
+          <h3 style="margin:0;">Firmware Updates</h3>
+        </div>
+        <p>Failed updates, bricked devices, OTA failures, version incompatibilities, and recovery modes.</p>
+        <div style="margin-top:1rem;"><span class="badge badge-red">Critical</span></div>
+      </a>
+      <a href="diagnosis.html" class="card" style="text-decoration:none;color:inherit;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+          <span style="font-size:1.75rem;">📊</span>
+          <h3 style="margin:0;">Sensor Malfunctions</h3>
+        </div>
+        <p>Inaccurate readings, dead sensors, calibration drift, and environmental interference.</p>
+        <div style="margin-top:1rem;"><span class="badge badge-yellow">Moderate</span></div>
+      </a>
+      <a href="diagnosis.html" class="card" style="text-decoration:none;color:inherit;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+          <span style="font-size:1.75rem;">⚙️</span>
+          <h3 style="margin:0;">Configuration Errors</h3>
+        </div>
+        <p>MQTT misconfiguration, API endpoint errors, wrong timezone, and authentication failures.</p>
+        <div style="margin-top:1rem;"><span class="badge badge-blue">Solvable</span></div>
+      </a>
+      <a href="diagnosis.html" class="card" style="text-decoration:none;color:inherit;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+          <span style="font-size:1.75rem;">🔗</span>
+          <h3 style="margin:0;">Compatibility Issues</h3>
+        </div>
+        <p>Cross-platform integration, protocol mismatches, Matter/Zigbee/Z-Wave compatibility.</p>
+        <div style="margin-top:1rem;"><span class="badge badge-gray">Complex</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFITS ═══ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Why Choose IoT AssistAI</span>
+      <h2>Benefits That Make a Difference</h2>
+    </div>
+    <div class="grid-2" style="gap:3rem;align-items:center;">
+      <div>
+        <ul class="feature-list" style="gap:.85rem;">
+          <li>Save hours of manual troubleshooting with instant AI-guided resolution</li>
+          <li>Reduce support tickets by 70% with self-service AI troubleshooting</li>
+          <li>Access 500+ device guides without searching through manuals</li>
+          <li>IBM watsonx.ai ensures enterprise-grade accuracy and reliability</li>
+          <li>RAG technology provides answers grounded in real documentation</li>
+          <li>Natural language interface — no technical expertise required</li>
+          <li>Voice input and image upload for hands-free troubleshooting</li>
+          <li>Dark mode and responsive design for any device or environment</li>
+        </ul>
+      </div>
+      <div class="feature-visual" style="padding:2rem;">
+        <svg width="280" height="220" viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Dashboard mockup -->
+          <rect x="10" y="10" width="260" height="200" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+          <rect x="10" y="10" width="260" height="32" rx="8" fill="rgba(15,98,254,.3)"/>
+          <circle cx="28" cy="26" r="6" fill="rgba(255,255,255,.2)"/>
+          <rect x="40" y="20" width="80" height="12" rx="3" fill="rgba(255,255,255,.2)"/>
+          <!-- Stats -->
+          <rect x="22" y="54" width="55" height="45" rx="4" fill="rgba(15,98,254,.2)"/>
+          <rect x="22" y="54" width="55" height="12" rx="4" fill="rgba(15,98,254,.3)"/>
+          <rect x="83" y="54" width="55" height="45" rx="4" fill="rgba(8,189,186,.15)"/>
+          <rect x="83" y="54" width="55" height="12" rx="4" fill="rgba(8,189,186,.25)"/>
+          <rect x="144" y="54" width="55" height="45" rx="4" fill="rgba(255,255,255,.05)"/>
+          <rect x="205" y="54" width="55" height="45" rx="4" fill="rgba(255,255,255,.05)"/>
+          <!-- Chart -->
+          <rect x="22" y="112" width="238" height="80" rx="4" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+          <polyline points="32,175 60,155 90,165 120,140 150,148 180,130 210,138 248,125" stroke="#0f62fe" stroke-width="2" fill="none"/>
+          <polyline points="32,180 60,170 90,175 120,165 150,168 180,160 210,162 248,155" stroke="rgba(8,189,186,.6)" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TECHNOLOGIES ═══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="overline">Powered By</span>
+      <h2>Enterprise AI Technology Stack</h2>
+      <p>Built on IBM's cutting-edge AI platform for maximum reliability and accuracy.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:.75rem;">🧠</div>
+        <h3>IBM watsonx.ai</h3>
+        <p>Foundation models for natural language understanding and generation.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:.75rem;">🔗</div>
+        <h3>IBM Langflow</h3>
+        <p>Visual AI workflow builder connecting data sources to LLM pipelines.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:.75rem;">🎭</div>
+        <h3>IBM Orchestrate</h3>
+        <p>AI agent orchestration for multi-step troubleshooting workflows.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:.75rem;">📖</div>
+        <h3>RAG Technology</h3>
+        <p>Retrieval-Augmented Generation ensures factually grounded responses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section style="background:linear-gradient(135deg,#001141,#003a8c);padding:5rem 0;text-align:center;">
+  <div class="container">
+    <h2 style="color:#fff;margin-bottom:1rem;">Ready to Fix Your IoT Device?</h2>
+    <p style="color:rgba(255,255,255,.75);font-size:1.1rem;margin-bottom:2rem;">Start a conversation with our AI — describe your issue and get instant, expert guidance.</p>
+    <div class="hero-ctas" style="justify-content:center;">
+      <a href="chatbot.html" class="btn btn-primary btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Start Troubleshooting
+      </a>
+      <a href="knowledge-base.html" class="btn btn-outline" style="border-color:rgba(255,255,255,.4);color:#fff;">Browse Knowledge Base</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">🔌 IoT AssistAI</div>
+        <p class="footer-desc">AI-powered troubleshooting platform for smart IoT devices. Built with IBM watsonx.ai, Langflow, and RAG technology.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <ul class="footer-links">
+          <li><a href="chatbot.html">AI Chatbot</a></li>
+          <li><a href="knowledge-base.html">Knowledge Base</a></li>
+          <li><a href="diagnosis.html">Diagnosis</a></li>
+          <li><a href="device-dashboard.html">Device Dashboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="knowledge-base.html">Documentation</a></li>
+          <li><a href="knowledge-base.html">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Technology</div>
+        <ul class="footer-links">
+          <li><a href="about.html">IBM watsonx.ai</a></li>
+          <li><a href="about.html">IBM Langflow</a></li>
+          <li><a href="about.html">IBM Orchestrate</a></li>
+          <li><a href="about.html">RAG Pipeline</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 IoT AssistAI. Built for IBM Hackathon.</span>
+      <span>Powered by IBM watsonx.ai</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
