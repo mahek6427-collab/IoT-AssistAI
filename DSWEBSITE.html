@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design and Analysis of Algorithms (DAA)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#1e3a8a', // blue-900
+                        secondary: '#3b82f6', // blue-500
+                        accent: '#10b981', // emerald-500
+                        darkbg: '#0f172a', // slate-900
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for code blocks */
+        pre::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        pre::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        pre::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        pre::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        .tab-active {
+            border-bottom: 2px solid #3b82f6;
+            color: #60a5fa;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="bg-primary text-white p-2 rounded-lg">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <span class="font-bold text-xl text-primary tracking-tight">CS301: DAA</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-slate-600 hover:text-primary font-medium transition-colors">Home</a>
+                    <a href="#sorting" class="text-slate-600 hover:text-primary font-medium transition-colors">Sorting</a>
+                    <a href="#datastructures" class="text-slate-600 hover:text-primary font-medium transition-colors">Data Structures</a>
+                    <a href="#graphs" class="text-slate-600 hover:text-primary font-medium transition-colors">Graphs</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-slate-600 hover:text-primary focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden relative">
+        <div class="absolute inset-0 z-0">
+            <!-- Decorative background elements -->
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+                Design & Analysis of <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Algorithms</span>
+            </h1>
+            <p class="mt-4 text-xl text-slate-600 max-w-3xl mx-auto mb-10">
+                Master the core concepts of algorithmic efficiency, data structures, and complex problem-solving. Your definitive resource for sorting, trees, and graph theory.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#sorting" class="px-8 py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-blue-800 transition-all flex items-center gap-2">
+                    Start Learning <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#datastructures" class="px-8 py-3 bg-white text-primary border border-slate-200 font-semibold rounded-lg shadow-sm hover:bg-slate-50 transition-all">
+                    Explore Data Structures
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sorting" class="py-20 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Sorting Algorithms</h2>
+                <div class="w-20 h-1 bg-secondary mt-4 rounded"></div>
+                <p class="mt-4 text-slate-600">Fundamental techniques for organizing data. Select an algorithm below to view its description, complexity, and C++ implementation.</p>
+            </div>
+
+            <!-- Algorithm Selection Tabs -->
+            <div class="flex flex-wrap gap-2 mb-8 border-b border-slate-200 pb-4" id="algo-tabs">
+                <button onclick="switchAlgo('merge')" id="btn-merge" class="px-4 py-2 rounded-lg bg-primary text-white font-medium transition-all shadow-sm">Merge Sort</button>
+                <button onclick="switchAlgo('quick')" id="btn-quick" class="px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition-all">Quick Sort</button>
+                <button onclick="switchAlgo('heap')" id="btn-heap" class="px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition-all">Heap Sort</button>
+                <button onclick="switchAlgo('radix')" id="btn-radix" class="px-4 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium transition-all">Radix Sort</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 min-h-[500px]">
+                
+                <!-- Dynamic Content Area -->
+                <div id="algo-info" class="flex flex-col">
+                    <!-- This content will be swapped via JS -->
+                    <h3 id="algo-title" class="text-2xl font-semibold text-primary mb-4">Merge Sort</h3>
+                    <p id="algo-desc" class="text-slate-600 mb-6 leading-relaxed">
+                        Merge Sort is a Divide and Conquer algorithm. It divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves.
+                    </p>
+                    
+                    <div class="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden mb-6 mt-auto">
+                        <table class="min-w-full divide-y divide-slate-200 text-sm">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-700">Metric</th>
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-700">Complexity</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="px-6 py-3 text-slate-600">Best Time</td>
+                                    <td id="comp-best" class="px-6 py-3 font-mono text-accent">Ω(n log n)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-3 text-slate-600">Average Time</td>
+                                    <td id="comp-avg" class="px-6 py-3 font-mono text-amber-600">Θ(n log n)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-3 text-slate-600">Worst Time</td>
+                                    <td id="comp-worst" class="px-6 py-3 font-mono text-red-500">O(n log n)</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-3 text-slate-600">Space</td>
+                                    <td id="comp-space" class="px-6 py-3 font-mono text-slate-700">O(n)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Code Viewer Component -->
+                <div class="bg-darkbg rounded-xl shadow-xl overflow-hidden flex flex-col h-full">
+                    <div class="flex items-center justify-between bg-slate-800 px-4 py-3 border-b border-slate-700">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span class="text-slate-400 text-xs font-mono">C++ Implementation</span>
+                    </div>
+                    
+                    <div class="relative flex-1 p-4 overflow-auto">
+                        <!-- Code blocks swapped via JS -->
+                        <pre id="code-display" class="font-mono text-sm text-slate-300 block"><code class="language-cpp"><span class="text-emerald-400">void</span> <span class="text-blue-400">merge</span>(<span class="text-emerald-400">int</span> arr[], <span class="text-emerald-400">int</span> l, <span class="text-emerald-400">int</span> m, <span class="text-emerald-400">int</span> r) {
+    <span class="text-emerald-400">int</span> n1 = m - l + <span class="text-orange-400">1</span>;
+    <span class="text-emerald-400">int</span> n2 = r - m;
+    <span class="text-emerald-400">int</span> L[n1], R[n2];
+
+    <span class="text-pink-400">for</span> (<span class="text-emerald-400">int</span> i = <span class="text-orange-400">0</span>; i < n1; i++) L[i] = arr[l + i];
+    <span class="text-pink-400">for</span> (<span class="text-emerald-400">int</span> j = <span class="text-orange-400">0</span>; j < n2; j++) R[j] = arr[m + <span class="text-orange-400">1</span> + j];
+
+    <span class="text-emerald-400">int</span> i = <span class="text-orange-400">0</span>, j = <span class="text-orange-400">0</span>, k = l;
+    <span class="text-pink-400">while</span> (i < n1 && j < n2) {
+        <span class="text-pink-400">if</span> (L[i] <= R[j]) {
+            arr[k] = L[i]; i++;
+        } <span class="text-pink-400">else</span> {
+            arr[k] = R[j]; j++;
+        }
+        k++;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="datastructures" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Advanced Data Structures</h2>
+                <div class="w-20 h-1 bg-accent mt-4 rounded"></div>
+                <p class="mt-4 text-slate-600">Explore complex data management systems essential for high-performance applications.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- AVL Tree Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-accent hover:shadow-md transition-all cursor-pointer" onclick="showDS('avl')">
+                    <i class="fa-solid fa-tree text-3xl text-emerald-500 mb-4"></i>
+                    <h3 class="text-lg font-bold text-slate-900">AVL Trees</h3>
+                    <p class="text-slate-500 text-xs mt-2">Self-balancing BST</p>
+                </div>
+                <!-- B-Tree Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all cursor-pointer" onclick="showDS('btree')">
+                    <i class="fa-solid fa-database text-3xl text-blue-500 mb-4"></i>
+                    <h3 class="text-lg font-bold text-slate-900">B-Trees</h3>
+                    <p class="text-slate-500 text-xs mt-2">Disk-optimized Search Tree</p>
+                </div>
+                <!-- Queues Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-purple-500 hover:shadow-md transition-all cursor-pointer" onclick="showDS('queue')">
+                    <i class="fa-solid fa-people-arrows text-3xl text-purple-500 mb-4"></i>
+                    <h3 class="text-lg font-bold text-slate-900">Queues</h3>
+                    <p class="text-slate-500 text-xs mt-2">FIFO Structure</p>
+                </div>
+                <!-- Priority Queue Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-500 hover:shadow-md transition-all cursor-pointer" onclick="showDS('pq')">
+                    <i class="fa-solid fa-layer-group text-3xl text-amber-500 mb-4"></i>
+                    <h3 class="text-lg font-bold text-slate-900">Priority Queue</h3>
+                    <p class="text-slate-500 text-xs mt-2">Heap-based Priority</p>
+                </div>
+            </div>
+
+            <!-- DS Details View -->
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-8 flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/3">
+                    <h3 id="ds-title" class="text-2xl font-bold text-slate-900 mb-4">AVL Trees</h3>
+                    <p id="ds-desc" class="text-slate-600 mb-4 text-sm leading-relaxed">
+                        A self-balancing binary search tree where the height of two child subtrees of any node differs by at most one.
+                    </p>
+                    <ul id="ds-complexities" class="space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        <li class="flex items-center justify-between"><span class="font-medium">Search:</span> <code class="text-accent">O(log n)</code></li>
+                        <li class="flex items-center justify-between"><span class="font-medium">Insert:</span> <code class="text-accent">O(log n)</code></li>
+                        <li class="flex items-center justify-between"><span class="font-medium">Delete:</span> <code class="text-accent">O(log n)</code></li>
+                    </ul>
+                </div>
+                <div class="lg:w-2/3 bg-slate-900 rounded-lg p-4 overflow-x-auto">
+                    <pre class="font-mono text-sm text-slate-300"><code id="ds-code" class="language-cpp"><span class="text-slate-500">// AVL Tree Node Implementation</span>
+<span class="text-pink-400">struct</span> Node {
+    <span class="text-emerald-400">int</span> key;
+    <span class="text-emerald-400">struct</span> Node *left;
+    <span class="text-emerald-400">struct</span> Node *right;
+    <span class="text-emerald-400">int</span> height;
+};
+
+<span class="text-emerald-400">int</span> <span class="text-blue-400">getBalance</span>(struct Node *N) {
+    <span class="text-pink-400">if</span> (N == <span class="text-purple-400">NULL</span>) <span class="text-pink-400">return</span> <span class="text-orange-400">0</span>;
+    <span class="text-pink-400">return</span> height(N->left) - height(N->right);
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="graphs" class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold text-slate-900">Graph Theory & Representation</h2>
+                    <div class="w-20 h-1 bg-purple-500 mt-4 rounded mb-6"></div>
+                    
+                    <div class="prose prose-slate max-w-none">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-3">Hamiltonian Paths & Cycles</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            A <strong>Hamiltonian path</strong> visits every vertex exactly once. A <strong>Hamiltonian cycle</strong> is a Hamiltonian path that is a cycle. Finding these is generally <strong>NP-complete</strong>.
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-slate-800 mb-3 mt-8">Matrix Representations</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            Graphs are computationally represented using matrices or lists. An <strong>Adjacency Matrix</strong> is a 2D array of size V x V where V is the number of vertices.
+                        </p>
+                        
+                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-100 mb-6">
+                            <h4 class="font-semibold text-purple-900 text-sm uppercase tracking-wider mb-2">Adjacency Matrix Example</h4>
+                            <pre class="font-mono text-sm text-purple-800">
+  A B C D
+A 0 1 0 1
+B 1 0 1 0
+C 0 1 0 1
+D 1 0 1 0
+                            </pre>
+                            <p class="text-xs text-purple-700 mt-2">Space Complexity: O(V²). Fast to query edge existence: O(1).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 w-full flex flex-col justify-center">
+                    <div class="bg-slate-900 rounded-xl shadow-xl overflow-hidden p-6 mb-6">
+                        <span class="text-slate-400 text-xs font-mono mb-2 block">// C++ Adjacency Matrix Setup</span>
+                        <pre class="font-mono text-sm text-slate-300"><code class="language-cpp"><span class="text-pink-400">#include</span> <span class="text-green-400">&lt;iostream&gt;</span>
+<span class="text-pink-400">#include</span> <span class="text-green-400">&lt;vector&gt;</span>
+<span class="text-pink-400">using namespace</span> std;
+
+<span class="text-emerald-400">int</span> <span class="text-blue-400">main</span>() {
+    <span class="text-emerald-400">int</span> V = <span class="text-orange-400">4</span>;
+    <span class="text-slate-500">// Initialize a V x V matrix with zeros</span>
+    vector&lt;vector&lt;<span class="text-emerald-400">int</span>&gt;&gt; adjMatrix(V, vector&lt;<span class="text-emerald-400">int</span>&gt;(V, <span class="text-orange-400">0</span>));
+
+    <span class="text-slate-500">// Add edge between 0 and 1</span>
+    adjMatrix[<span class="text-orange-400">0</span>][<span class="text-orange-400">1</span>] = <span class="text-orange-400">1</span>;
+    adjMatrix[<span class="text-orange-400">1</span>][<span class="text-orange-400">0</span>] = <span class="text-orange-400">1</span>; <span class="text-slate-500">// Undirected</span>
+    
+    <span class="text-pink-400">return</span> <span class="text-orange-400">0</span>;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="trees" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Tree Data Structures</h2>
+                <div class="w-20 h-1 bg-accent mt-4 rounded"></div>
+                <p class="mt-4 text-slate-600">Advanced hierarchical structures essential for databases and fast lookups.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- AVL Tree Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">AVL Trees</h3>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                        A self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one. If at any time they differ by more than one, rebalancing (rotations) is done to restore this property.
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent"></i> <strong>Search:</strong> O(log n)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent"></i> <strong>Insert:</strong> O(log n)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent"></i> <strong>Delete:</strong> O(log n)</li>
+                    </ul>
+                </div>
+
+                <!-- B-Tree Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">B-Trees</h3>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">
+                        A self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time. Optimized for systems that read and write large blocks of data.
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Widely used in <strong>Databases</strong></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Widely used in <strong>File Systems</strong></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Minimizes disk I/O operations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="graphs" class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold text-slate-900">Graph Theory</h2>
+                    <div class="w-20 h-1 bg-purple-500 mt-4 rounded mb-6"></div>
+                    
+                    <div class="prose prose-slate max-w-none">
+                        <h3 class="text-xl font-semibold text-slate-800 mb-3">Hamiltonian Paths & Cycles</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            A <strong>Hamiltonian path</strong> (or traceable path) is a path in an undirected or directed graph that visits every vertex exactly once. A <strong>Hamiltonian cycle</strong> is a Hamiltonian path that is a cycle (the first and last vertices are connected).
+                        </p>
+                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-100 mb-6">
+                            <h4 class="font-semibold text-purple-900 text-sm uppercase tracking-wider mb-2">Complexity & Nature</h4>
+                            <p class="text-sm text-purple-800">
+                                Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is <strong>NP-complete</strong>.
+                            </p>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Common approaches to solve or approximate this include Backtracking, Dynamic Programming (Held-Karp algorithm with complexity O(n² 2ⁿ)), and various heuristics.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 w-full">
+                    <!-- Graph visual placeholder -->
+                    <div class="aspect-video bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center flex-col relative overflow-hidden group">
+                        <i class="fa-solid fa-project-diagram text-5xl text-slate-300 mb-4 group-hover:text-purple-400 transition-colors"></i>
+                        <span class="text-slate-500 font-medium text-sm">Interactive Graph Visualizer (Placeholder)</span>
+                        <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur p-3 rounded shadow-sm text-xs text-center border border-slate-200">
+                            Nodes: V = {1, 2, 3, 4, 5} | Edges: E = {(1,2), (2,3), (3,4), (4,5), (5,1)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-network-wired text-secondary"></i>
+                        <span class="font-bold text-xl text-white">CS301: DAA</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-xs">
+                        Department of Computer Science & Engineering. Empowering students with algorithmic thinking.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#sorting" class="hover:text-secondary transition-colors">Sorting Algorithms</a></li>
+                        <li><a href="#datastructures" class="hover:text-secondary transition-colors">Advanced Data Structures</a></li>
+                        <li><a href="#graphs" class="hover:text-secondary transition-colors">Graph Theory</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Syllabus & Curriculum</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-secondary transition-colors">Lecture Notes (PDF)</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Assignment Portal</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Recommended Books</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-500">
+                &copy; 2026 CS301 DAA Course Portal. Built for educational purposes.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Sorting Algorithms Data
+        const algos = {
+            merge: {
+                title: "Merge Sort",
+                desc: "Merge Sort is a Divide and Conquer algorithm. It divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves.",
+                best: "Ω(n log n)", avg: "Θ(n log n)", worst: "O(n log n)", space: "O(n)",
+                code: `<span class="text-emerald-400">void</span> <span class="text-blue-400">merge</span>(<span class="text-emerald-400">int</span> arr[], <span class="text-emerald-400">int</span> l, <span class="text-emerald-400">int</span> m, <span class="text-emerald-400">int</span> r) {\n    <span class="text-emerald-400">int</span> n1 = m - l + <span class="text-orange-400">1</span>;\n    <span class="text-emerald-400">int</span> n2 = r - m;\n    <span class="text-emerald-400">int</span> L[n1], R[n2];\n\n    <span class="text-pink-400">for</span> (<span class="text-emerald-400">int</span> i = <span class="text-orange-400">0</span>; i < n1; i++) L[i] = arr[l + i];\n    <span class="text-pink-400">for</span> (<span class="text-emerald-400">int</span> j = <span class="text-orange-400">0</span>; j < n2; j++) R[j] = arr[m + <span class="text-orange-400">1</span> + j];\n\n    <span class="text-emerald-400">int</span> i = <span class="text-orange-400">0</span>, j = <span class="text-orange-400">0</span>, k = l;\n    <span class="text-pink-400">while</span> (i < n1 && j < n2) {\n        <span class="text-pink-400">if</span> (L[i] <= R[j]) { arr[k] = L[i]; i++; }\n        <span class="text-pink-400">else</span> { arr[k] = R[j]; j++; }\n        k++;\n    }\n}`
+            },
+            quick: {
+                title: "Quick Sort",
+                desc: "Quick Sort is a Divide and Conquer algorithm. It picks an element as a pivot and partitions the given array around the picked pivot, placing it in its correct sorted position.",
+                best: "Ω(n log n)", avg: "Θ(n log n)", worst: "O(n²)", space: "O(log n)",
+                code: `<span class="text-emerald-400">int</span> <span class="text-blue-400">partition</span>(<span class="text-emerald-400">int</span> arr[], <span class="text-emerald-400">int</span> low, <span class="text-emerald-400">int</span> high) {\n    <span class="text-emerald-400">int</span> pivot = arr[high];\n    <span class="text-emerald-400">int</span> i = (low - <span class="text-orange-400">1</span>);\n    <span class="text-pink-400">for</span> (<span class="text-emerald-400">int</span> j = low; j <= high - <span class="text-orange-400">1</span>; j++) {\n        <span class="text-pink-400">if</span> (arr[j] < pivot) {\n            i++;\n            swap(arr[i], arr[j]);\n        }\n    }\n    swap(arr[i + <span class="text-orange-400">1</span>], arr[high]);\n    <span class="text-pink-400">return</span> (i + <span class="text-orange-400">1</span>);\n}`
+            },
+            heap: {
+                title: "Heap Sort",
+                desc: "Heap Sort is a comparison-based sorting technique based on a Binary Heap data structure. It involves building a max-heap and repeatedly extracting the maximum element.",
+                best: "Ω(n log n)", avg: "Θ(n log n)", worst: "O(n log n)", space: "O(1)",
+                code: `<span class="text-emerald-400">void</span> <span class="text-blue-400">heapify</span>(<span class="text-emerald-400">int</span> arr[], <span class="text-emerald-400">int</span> N, <span class="text-emerald-400">int</span> i) {\n    <span class="text-emerald-400">int</span> largest = i;\n    <span class="text-emerald-400">int</span> l = <span class="text-orange-400">2</span> * i + <span class="text-orange-400">1</span>;\n    <span class="text-emerald-400">int</span> r = <span class="text-orange-400">2</span> * i + <span class="text-orange-400">2</span>;\n    <span class="text-pink-400">if</span> (l < N && arr[l] > arr[largest]) largest = l;\n    <span class="text-pink-400">if</span> (r < N && arr[r] > arr[largest]) largest = r;\n    <span class="text-pink-400">if</span> (largest != i) {\n        swap(arr[i], arr[largest]);\n        heapify(arr, N, largest);\n    }\n}`
+            },
+            radix: {
+                title: "Radix Sort",
+                desc: "Radix Sort is a non-comparative sorting algorithm. It avoids comparison by creating and distributing elements into buckets according to their radix (base).",
+                best: "Ω(nk)", avg: "Θ(nk)", worst: "O(nk)", space: "O(n + k)",
+                code: `<span class="text-emerald-400">void</span> <span class="text-blue-400">countSort</span>(<span class="text-emerald-400">int</span> arr[], <span class="text-emerald-400">int</span> n, <span class="text-emerald-400">int</span> exp) {\n    <span class="text-emerald-400">int</span> output[n];\n    <span class="text-emerald-400">int</span> i, count[<span class="text-orange-400">10</span>] = {<span class="text-orange-400">0</span>};\n    <span class="text-pink-400">for</span> (i = <span class="text-orange-400">0</span>; i < n; i++) count[(arr[i] / exp) % <span class="text-orange-400">10</span>]++;\n    <span class="text-pink-400">for</span> (i = <span class="text-orange-400">1</span>; i < <span class="text-orange-400">10</span>; i++) count[i] += count[i - <span class="text-orange-400">1</span>];\n    <span class="text-pink-400">for</span> (i = n - <span class="text-orange-400">1</span>; i >= <span class="text-orange-400">0</span>; i--) {\n        output[count[(arr[i] / exp) % <span class="text-orange-400">10</span>] - <span class="text-orange-400">1</span>] = arr[i];\n        count[(arr[i] / exp) % <span class="text-orange-400">10</span>]--;\n    }\n    <span class="text-pink-400">for</span> (i = <span class="text-orange-400">0</span>; i < n; i++) arr[i] = output[i];\n}`
+            }
+        };
+
+        const dsData = {
+            avl: {
+                title: "AVL Trees",
+                desc: "A self-balancing binary search tree where the height of two child subtrees of any node differs by at most one.",
+                ops: "Search: O(log n) | Insert: O(log n) | Delete: O(log n)",
+                code: `<span class="text-slate-500">// AVL Tree Node Implementation</span>\n<span class="text-pink-400">struct</span> Node {\n    <span class="text-emerald-400">int</span> key;\n    <span class="text-emerald-400">struct</span> Node *left;\n    <span class="text-emerald-400">struct</span> Node *right;\n    <span class="text-emerald-400">int</span> height;\n};\n\n<span class="text-emerald-400">int</span> <span class="text-blue-400">getBalance</span>(struct Node *N) {\n    <span class="text-pink-400">if</span> (N == <span class="text-purple-400">NULL</span>) <span class="text-pink-400">return</span> <span class="text-orange-400">0</span>;\n    <span class="text-pink-400">return</span> height(N->left) - height(N->right);\n}`
+            },
+            btree: {
+                title: "B-Trees",
+                desc: "A self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time. Essential for Databases.",
+                ops: "Search: O(log n) | Insert: O(log n) | Delete: O(log n)",
+                code: `<span class="text-slate-500">// B-Tree Node (Simplified)</span>\n<span class="text-pink-400">class</span> BTreeNode {\n    <span class="text-emerald-400">int</span> *keys;  <span class="text-slate-500">// Array of keys</span>\n    <span class="text-emerald-400">int</span> t;      <span class="text-slate-500">// Minimum degree</span>\n    BTreeNode **C; <span class="text-slate-500">// Child pointers</span>\n    <span class="text-emerald-400">int</span> n;      <span class="text-slate-500">// Current num of keys</span>\n    <span class="text-emerald-400">bool</span> leaf;  <span class="text-slate-500">// Is true when node is leaf</span>\n<span class="text-pink-400">public</span>:\n    BTreeNode(<span class="text-emerald-400">int</span> _t, <span class="text-emerald-400">bool</span> _leaf);\n    <span class="text-emerald-400">void</span> traverse();\n};`
+            },
+            queue: {
+                title: "Queues",
+                desc: "A linear data structure that follows the First-In-First-Out (FIFO) principle. Used in BFS, CPU scheduling, and handling requests.",
+                ops: "Enqueue: O(1) | Dequeue: O(1) | Front: O(1)",
+                code: `<span class="text-pink-400">#include</span> <span class="text-green-400">&lt;queue&gt;</span>\n<span class="text-pink-400">using namespace</span> std;\n\n<span class="text-emerald-400">int</span> <span class="text-blue-400">main</span>() {\n    queue&lt;<span class="text-emerald-400">int</span>&gt; q;\n    q.push(<span class="text-orange-400">10</span>); <span class="text-slate-500">// Enqueue</span>\n    q.push(<span class="text-orange-400">20</span>);\n    \n    <span class="text-emerald-400">int</span> front = q.front(); <span class="text-slate-500">// Access front (10)</span>\n    q.pop();               <span class="text-slate-500">// Dequeue</span>\n}`
+            },
+            pq: {
+                title: "Priority Queue",
+                desc: "An abstract data type similar to a regular queue, but where additionally each element has a 'priority' associated with it. Often implemented with Heaps.",
+                ops: "Insert: O(log n) | Extract Max/Min: O(log n) | Peek: O(1)",
+                code: `<span class="text-pink-400">#include</span> <span class="text-green-400">&lt;queue&gt;</span>\n<span class="text-pink-400">using namespace</span> std;\n\n<span class="text-emerald-400">int</span> <span class="text-blue-400">main</span>() {\n    <span class="text-slate-500">// Max-Heap by default</span>\n    priority_queue&lt;<span class="text-emerald-400">int</span>&gt; pq;\n    pq.push(<span class="text-orange-400">30</span>);\n    pq.push(<span class="text-orange-400">100</span>);\n    pq.push(<span class="text-orange-400">25</span>);\n    \n    <span class="text-slate-500">// Top will be 100</span>\n    <span class="text-emerald-400">int</span> highest = pq.top();\n    pq.pop();\n}`
+            }
+        };
+
+        function switchAlgo(algoId) {
+            // Update Buttons
+            ['merge', 'quick', 'heap', 'radix'].forEach(id => {
+                const btn = document.getElementById(`btn-${id}`);
+                if (id === algoId) {
+                    btn.classList.replace('bg-slate-100', 'bg-primary');
+                    btn.classList.replace('text-slate-600', 'text-white');
+                    btn.classList.remove('hover:bg-slate-200');
+                } else {
+                    btn.classList.replace('bg-primary', 'bg-slate-100');
+                    btn.classList.replace('text-white', 'text-slate-600');
+                    btn.classList.add('hover:bg-slate-200');
+                }
+            });
+
+            // Update Content
+            const data = algos[algoId];
+            document.getElementById('algo-title').innerText = data.title;
+            document.getElementById('algo-desc').innerText = data.desc;
+            document.getElementById('comp-best').innerText = data.best;
+            document.getElementById('comp-avg').innerText = data.avg;
+            document.getElementById('comp-worst').innerText = data.worst;
+            document.getElementById('comp-space').innerText = data.space;
+            document.getElementById('code-display').innerHTML = `<code class="language-cpp">${data.code}</code>`;
+        }
+
+        function showDS(dsId) {
+            const data = dsData[dsId];
+            document.getElementById('ds-title').innerText = data.title;
+            document.getElementById('ds-desc').innerText = data.desc;
+            
+            // Format ops simply
+            const opsParts = data.ops.split(' | ');
+            let opsHTML = '';
+            opsParts.forEach(part => {
+                const [op, comp] = part.split(': ');
+                opsHTML += `<li class="flex items-center justify-between"><span class="font-medium">${op}:</span> <code class="text-accent">${comp}</code></li>`;
+            });
+            document.getElementById('ds-complexities').innerHTML = opsHTML;
+            document.getElementById('ds-code').innerHTML = data.code;
+        }
+    </script>
+</body>
+</html>
